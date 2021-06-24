@@ -6,16 +6,17 @@ class Postbuild
 {
 	static function main()
 	{
-		trace('creating NG zip');
-		var binFolder:String = 'export/release/html5/bin/';
+		/* trace('creating NG zip');
+			var binFolder:String = 'export/release/html5/bin/';
 
-		var date = Date.now();
-		var outputName:String = 'NG-' + date.format("%Y%m%d--%H%M") + '.zip';
+			var date = Date.now();
+			var outputName:String = 'NG-' + date.format("%Y%m%d--%H%M") + '.zip';
 
-		var out = sys.io.File.write(outputName);
-		var zip = new haxe.zip.Writer(out);
-		zip.write(getEntries(binFolder));
-		trace('Finished creating ZIP');
+			var out = sys.io.File.write(outputName);
+			var zip = new haxe.zip.Writer(out);
+			zip.write(getEntries(binFolder));
+			trace('Finished creating ZIP');
+		 */
 	}
 
 	static function getEntries(dir:String, entries:List<haxe.zip.Entry> = null, inDir:Null<String> = null)
