@@ -8,6 +8,12 @@ import haxe.Log;
 import sys.FileSystem;
 import sys.io.File;
 
+// general use of this!!
+// if run in INTERP MODE:
+//		- art>haxe --main SongConverter --interp
+//		- song to convert: ../assets/preload/data/
+//		it will run through EVERY folder in there and convert the old songs to the new format!
+// TODO make instructions for the C# script version!
 class SongConverter
 {
 	// TODO
@@ -19,6 +25,8 @@ class SongConverter
 		final input = Sys.stdin().readLine();
 		trace('Hello ${input}!');
 
+		var songCount:Int = 0;
+
 		for (fileThing in FileSystem.readDirectory('${input}/.'))
 		{
 			// trace(fileThing);
@@ -26,9 +34,22 @@ class SongConverter
 
 			if (FileSystem.isDirectory(${input} + "/" + fileThing) && fileThing.toLowerCase() != 'smash')
 			{
+				songCount++;
 				trace('Formatting $fileThing');
 				formatSongs(fileThing, input);
 			}
+		}
+
+		trace('CONVERTED $songCount SONGS!!');
+
+		var timer:Int = 5;
+
+		while (timer > 0)
+		{
+			Sys.stdout().writeString('CLOSING IN $timer SECONDS!');
+			Sys.sleep(1);
+			Sys.print("\r");
+			timer -= 1;
 		}
 	}
 
@@ -78,7 +99,7 @@ class SongConverter
 		// trace(fileNormal.song.speed);
 
 		var daJson = Json.stringify(fileNormal);
-		trace(daJson);
+		// trace(daJson);
 		File.saveContent('$root/$songName/$songName-new.json', daJson);
 	}
 
