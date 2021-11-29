@@ -16,6 +16,8 @@ import sys.io.File;
 // TODO make instructions for the C# script version!
 class SongConverter
 {
+	public static var VERSION:String = '0.1.0';
+
 	// TODO
 	// Update engine shit, to accomodate single file
 	static function main()
@@ -72,9 +74,9 @@ class SongConverter
 		if (!existsArray[2])
 			songFiles[2] = songFiles[1];
 
-		var fileNormal:Dynamic = cast Json.parse(File.getContent(songFiles[0]));
-		var fileHard:Dynamic = cast Json.parse(File.getContent(songFiles[1]));
-		var fileEasy:Dynamic = cast Json.parse(File.getContent(songFiles[2]));
+		var fileNormal:Dynamic = cast Json.parse(File.getContent(songFiles[1]));
+		var fileHard:Dynamic = cast Json.parse(File.getContent(songFiles[2]));
+		var fileEasy:Dynamic = cast Json.parse(File.getContent(songFiles[0]));
 
 		var daOgNotes:Dynamic = fileNormal.song.notes;
 		var daOgSpeed:Float = fileNormal.song.speed;
@@ -98,7 +100,9 @@ class SongConverter
 
 		// trace(fileNormal.song.speed);
 
-		var daJson = Json.stringify(fileNormal);
+		fileNormal.version = 'FNF SongConverter $VERSION';
+
+		var daJson = Json.stringify(fileNormal, null, "\t");
 		// trace(daJson);
 		File.saveContent('$root/$songName/$songName-new.json', daJson);
 	}
