@@ -21,21 +21,24 @@ class SongConverter
 
 		for (fileThing in FileSystem.readDirectory('${input}/.'))
 		{
-			if (FileSystem.isDirectory(fileThing) && fileThing.toLowerCase() != 'smash')
+			// trace(fileThing);
+			// trace(FileSystem.isDirectory(${input} + "/" + fileThing));
+
+			if (FileSystem.isDirectory(${input} + "/" + fileThing) && fileThing.toLowerCase() != 'smash')
 			{
 				trace('Formatting $fileThing');
-				formatSongs(fileThing);
+				formatSongs(fileThing, input);
 			}
 		}
 	}
 
-	public static function formatSongs(songName:String)
+	public static function formatSongs(songName:String, root:String)
 	{
 		var existsArray:Array<Bool> = [];
 		var songFiles:Array<String> = [
-			'$songName/$songName-easy.json',
-			'$songName/$songName.json',
-			'$songName/$songName-hard.json'
+			'$root/$songName/$songName-easy.json',
+			'$root/$songName/$songName.json',
+			'$root/$songName/$songName-hard.json'
 		];
 
 		existsArray.push(FileSystem.exists(songFiles[0]));
@@ -75,7 +78,8 @@ class SongConverter
 		// trace(fileNormal.song.speed);
 
 		var daJson = Json.stringify(fileNormal);
-		File.saveContent('$songName/$songName-new.json', daJson);
+		trace(daJson);
+		File.saveContent('$root/$songName/$songName-new.json', daJson);
 	}
 
 	static function noteCleaner(notes:Array<Dynamic>):Array<Dynamic>
