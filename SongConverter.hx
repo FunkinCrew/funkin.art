@@ -76,17 +76,36 @@ class SongConverter
 
 		for (songFile in FileSystem.readDirectory('$root/$songName/'))
 		{
-			var songSplit:Array<String> = songFile.split('-');
+			var funnyFile:Dynamic = cast Json.parse(File.getContent('$root/$songName/$songFile'));
 
+			var songSplit:Array<String> = songFile.split('-');
 			var songShit:String = 'normal';
 
-			if (songSplit.length > 1)
-				songShit = songSplit[1];
+			trace(Type.typeof(funnyFile.song.notes));
 
-			songMap[songShit] = 'swag';
+			if (songSplit.length > 1)
+				songShit = songSplit[1].substr(0, songSplit[1].length - 5);
+
+			if (songShit != 'normal')
+				songMap[songShit] = funnyFile.song.notes;
+			else
+			{
+				//
+
+				if (funnyFile.song.notes is Array)
+					songMap[songShit] = funnyFile.song.notes[1];
+				else if (Type.typeof(funnyFile.song.notes) == TObject)
+				{
+					var dipshitMap:Map<String, Dynamic> = cast funnyFile.song.notes;
+
+					// songMap[songShit] = dipshitMap.get('normal');
+				}
+				else
+					songMap[songShit] = funnyFile.song.notes;
+			}
 		}
 
-		trace(songMap);
+		// trace(songMap);
 
 		var songFiles:Array<String> = [
 			'$root/$songName/$songName-easy.json',
@@ -124,9 +143,7 @@ class SongConverter
 		// daOgNotes = noteCleaner(daOgNotes);
 		// fileHard.song.notes = noteCleaner(fileHard.song.notes);
 
-		fileNormal.song.notes.push(fileEasy.song.notes);
-		fileNormal.song.notes.push(daOgNotes);
-		fileNormal.song.notes.push(fileHard.song.notes);
+		fileNormal.song.notes = songMap;
 
 		fileNormal.song.speed.push(fileEasy.song.speed);
 		fileNormal.song.speed.push(daOgSpeed);
