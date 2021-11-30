@@ -1,13 +1,14 @@
+import haxe.Json;
+import haxe.Log;
+import haxe.macro.Compiler;
+import sys.FileSystem;
+import sys.io.File;
+
 #if !interp
 package art;
 
 // needs this thing to be run by interp, just for me lol!
 #end
-import haxe.Json;
-import haxe.Log;
-import sys.FileSystem;
-import sys.io.File;
-
 // general use of this!!
 // if run in INTERP MODE:
 //		- art>haxe --main SongConverter --interp
@@ -22,6 +23,9 @@ class SongConverter
 	// Update engine shit, to accomodate single file
 	static function main()
 	{
+		// trace(Compiler.get);
+		trace(Compiler.getDefine('sysfsd'));
+
 		Sys.stdout().writeString('Please type directory you want to convert: ');
 		Sys.stdout().flush();
 		final input = Sys.stdin().readLine();
