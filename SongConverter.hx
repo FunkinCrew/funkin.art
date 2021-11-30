@@ -108,7 +108,7 @@ class SongConverter
 
 		var daJson = Json.stringify(fileNormal, null, "\t");
 		// trace(daJson);
-		File.saveContent('$root/$songName/$songName-new.json', daJson);
+		File.saveContent('$root/$songName/$songName.json', daJson);
 	}
 
 	static function noteCleaner(notes:Array<Dynamic>):Array<Dynamic>
