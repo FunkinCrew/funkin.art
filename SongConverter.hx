@@ -73,27 +73,44 @@ class SongConverter
 		var existsArray:Array<Bool> = [];
 
 		var songMap:Map<String, Dynamic> = new Map();
+		var speedMap:Map<String, Dynamic> = new Map();
 
 		for (songFile in FileSystem.readDirectory('$root/$songName/'))
 		{
+			if (!songFile.endsWith('json') || !songFile.startsWith(songName))
+				continue; // skips roses for now....
+
 			var funnyFile:Dynamic = cast Json.parse(File.getContent('$root/$songName/$songFile'));
 
 			var songSplit:Array<String> = songFile.split('-');
 			var songShit:String = 'normal';
 
-			trace(Type.typeof(funnyFile.song.notes));
-
 			if (songSplit.length > 1)
+			{
+				if (songSplit[1] == 'new.json')
+				{
+					FileSystem.deleteFile('$root/$songName/$songFile');
+					trace('DELETEING $songFile');
+					continue;
+				}
+
 				songShit = songSplit[1].substr(0, songSplit[1].length - 5);
+			}
 
 			if (songShit != 'normal')
+			{
 				songMap[songShit] = funnyFile.song.notes;
+				speedMap[songShit] = funnyFile.song.speed;
+			}
 			else
 			{
 				//
 
 				if (funnyFile.song.notes is Array)
+				{
 					songMap[songShit] = funnyFile.song.notes[1];
+					speedMap[songShit] = funnyFile.song.speed[1];
+				}
 				else if (Type.typeof(funnyFile.song.notes) == TObject)
 				{
 					var dipshitMap:Map<String, Dynamic> = cast funnyFile.song.notes;
@@ -101,57 +118,20 @@ class SongConverter
 					// songMap[songShit] = dipshitMap.get('normal');
 				}
 				else
+				{
 					songMap[songShit] = funnyFile.song.notes;
+					speedMap[songShit] = funnyFile.song.speed;
+				}
 			}
 		}
 
-		// trace(songMap);
-
-		var songFiles:Array<String> = [
-			'$root/$songName/$songName-easy.json',
-			'$root/$songName/$songName.json',
-			'$root/$songName/$songName-hard.json'
-		];
-
-		existsArray.push(FileSystem.exists(songFiles[0]));
-		existsArray.push(FileSystem.exists(songFiles[1]));
-		existsArray.push(FileSystem.exists(songFiles[2]));
-
-		// ALWAYS ASSUMES THAT 'songName.json' EXISTS AT LEAST!!!
-		if (!existsArray[0])
-			songFiles[0] = songFiles[1];
-		if (!existsArray[2])
-			songFiles[2] = songFiles[1];
-
-		var fileNormal:Dynamic = cast Json.parse(File.getContent(songFiles[1]));
-		var fileHard:Dynamic = cast Json.parse(File.getContent(songFiles[2]));
-		var fileEasy:Dynamic = cast Json.parse(File.getContent(songFiles[0]));
-
-		var daOgNotes:Dynamic = fileNormal.song.notes;
-		var daOgSpeed:Dynamic = fileNormal.song.speed;
-
-		// if already new format, doesn't like... double format it?!
-		if (daOgNotes is Array)
-			daOgNotes = daOgNotes[1];
-		if (daOgSpeed is Array)
-			daOgSpeed = daOgSpeed[1];
-
-		fileNormal.song.notes = [];
-		fileNormal.song.speed = [];
-
-		// fileEasy.song.notes = noteCleaner(fileEasy.song.notes);
-		// daOgNotes = noteCleaner(daOgNotes);
-		// fileHard.song.notes = noteCleaner(fileHard.song.notes);
+		var fileNormal:Dynamic = cast Json.parse(File.getContent('$root/$songName/$songName.json'));
 
 		fileNormal.song.notes = songMap;
+		fileNormal.song.speed = speedMap;
 
-		fileNormal.song.speed.push(fileEasy.song.speed);
-		fileNormal.song.speed.push(daOgSpeed);
-		fileNormal.song.speed.push(fileHard.song.speed);
 		fileNormal.song.hasDialogueFile = false;
 		fileNormal.song.stageDefault = getStage(songName);
-
-		// trace(fileNormal.song.speed);
 
 		fileNormal.version = 'FNF SongConverter $VERSION';
 
