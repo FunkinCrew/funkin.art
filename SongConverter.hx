@@ -4,6 +4,8 @@ import haxe.macro.Compiler;
 import sys.FileSystem;
 import sys.io.File;
 
+using StringTools;
+
 #if !interp
 package art;
 
@@ -24,12 +26,18 @@ class SongConverter
 	static function main()
 	{
 		// trace(Compiler.get);
-		trace(Compiler.getDefine('sysfsd'));
+		// trace(Compiler.getDefine('sysfsd'));
 
 		Sys.stdout().writeString('Please type directory you want to convert: ');
 		Sys.stdout().flush();
 		final input = Sys.stdin().readLine();
 		trace('Hello ${input}!');
+
+		/* Sys.stdout().writeString('What type of conversion do you need?\n\t0: Old charts to new chart\n\t1: new chart to .... new chart? lol\n>');
+			Sys.stdout().flush();
+			final deleteShitIDK = Std.parseInt(Sys.stdin().readLine());
+
+			trace(deleteShitIDK); */
 
 		var songCount:Int = 0;
 
@@ -40,9 +48,10 @@ class SongConverter
 
 			if (FileSystem.isDirectory(${input} + "/" + fileThing) && fileThing.toLowerCase() != 'smash')
 			{
-				songCount++;
 				trace('Formatting $fileThing');
 				formatSongs(fileThing, input);
+
+				songCount++;
 			}
 		}
 
@@ -62,6 +71,23 @@ class SongConverter
 	public static function formatSongs(songName:String, root:String)
 	{
 		var existsArray:Array<Bool> = [];
+
+		var songMap:Map<String, Dynamic> = new Map();
+
+		for (songFile in FileSystem.readDirectory('$root/$songName/'))
+		{
+			var songSplit:Array<String> = songFile.split('-');
+
+			var songShit:String = 'normal';
+
+			if (songSplit.length > 1)
+				songShit = songSplit[1];
+
+			songMap[songShit] = 'swag';
+		}
+
+		trace(songMap);
+
 		var songFiles:Array<String> = [
 			'$root/$songName/$songName-easy.json',
 			'$root/$songName/$songName.json',
@@ -83,7 +109,13 @@ class SongConverter
 		var fileEasy:Dynamic = cast Json.parse(File.getContent(songFiles[0]));
 
 		var daOgNotes:Dynamic = fileNormal.song.notes;
-		var daOgSpeed:Float = fileNormal.song.speed;
+		var daOgSpeed:Dynamic = fileNormal.song.speed;
+
+		// if already new format, doesn't like... double format it?!
+		if (daOgNotes is Array)
+			daOgNotes = daOgNotes[1];
+		if (daOgSpeed is Array)
+			daOgSpeed = daOgSpeed[1];
 
 		fileNormal.song.notes = [];
 		fileNormal.song.speed = [];
