@@ -78,7 +78,7 @@ class SongConverter
 		for (songFile in FileSystem.readDirectory('$root/$songName/'))
 		{
 			if (!songFile.endsWith('json') || !songFile.startsWith(songName))
-				continue; // skips roses for now....
+				continue; // ACCOMODATE FOR PICO SPEAKER EVENTUALLY!
 
 			var funnyFile:Dynamic = cast Json.parse(File.getContent('$root/$songName/$songFile'));
 
