@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas imagePath="tankTalkSong1.png">
-	<!-- Created with Adobe Animate version 21.0.0.35450 -->
-	<!-- http://www.adobe.com/products/animate.html -->
 	<SubTexture name="TANK TALK 1 P10000" x="2974" y="2302" width="392" height="572" frameX="-2" frameY="-4" frameWidth="397" frameHeight="576"/>
 	<SubTexture name="TANK TALK 1 P10001" x="2974" y="2302" width="392" height="572" frameX="-2" frameY="-4" frameWidth="397" frameHeight="576"/>
 	<SubTexture name="TANK TALK 1 P10002" x="2775" y="3452" width="392" height="567" frameX="-2" frameY="-9" frameWidth="397" frameHeight="576"/>
