@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas imagePath="gfHoldup-5.png">
-	<!-- Created with Adobe Animate version 21.0.0.35450 -->
-	<!-- http://www.adobe.com/products/animate.html -->
 	<SubTexture name="PICO ARRIVES PART 3 instance 10000" x="0" y="0" width="2546" height="993"/>
 	<SubTexture name="PICO ARRIVES PART 3 instance 10001" x="2550" y="0" width="2546" height="993"/>
 	<SubTexture name="PICO ARRIVES PART 3 instance 10002" x="5100" y="0" width="2546" height="993"/>
