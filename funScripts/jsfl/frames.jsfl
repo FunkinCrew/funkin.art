@@ -2,6 +2,7 @@
 // drag .jsfl script in
 // will export the layer info of the first(?) element it finds?
 // maybe someone can extend this to add more depth / functionality!
+// see FramesJSFLParser.hx and CharSelectGF.hx for sample implementation
 
 function splitArrayIntoChunks(array, chunkSize) {
     var result = [];
