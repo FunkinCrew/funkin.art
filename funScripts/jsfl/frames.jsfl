@@ -1,6 +1,7 @@
 // Highlight keyframes in flash
 // drag .jsfl script in
 // will export the layer info of the first(?) element it finds?
+// maybe someone can extend this to add more depth / functionality!
 
 function splitArrayIntoChunks(array, chunkSize) {
     var result = [];
