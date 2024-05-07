@@ -81,7 +81,7 @@ with open(csv_file, 'r') as file:
           if row[col] == "":
             continue
           if diff in ratings:
-            ratings[diff] = float(row[col]) # convert the string to a float, and then round it to nearest int
+            ratings[diff] = round(float(row[col])) # convert the string to a float, and then round it to nearest int
 
         # Convert the python json_data dict back to a json string
         json_output = json.dumps(json_data)
