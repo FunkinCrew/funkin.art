@@ -15,8 +15,8 @@ Audio File: ../../assets/videos/videos/stressPicoCutscene.mkv
 Video File: ../../assets/videos/videos/stressPicoCutscene.mkv
 Video AR Mode: 4
 Video AR Value: 1.777778
-Active Line: 3
-Video Position: 31
+Active Line: 5
+Video Position: 455
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
@@ -1299,7 +1299,7 @@ Dialogue: 0,0:00:02.66,0:00:04.16,Funkin - VCR,,0,0,0,,Oh, that's cute.
 Dialogue: 0,0:00:04.73,0:00:06.54,Funkin - VCR,,0,0,0,,Boys... Light 'em up.
 Dialogue: 0,0:00:08.98,0:00:11.50,Funkin - VCR (Align Left),,0,0,0,,*SCREAMS*
 Dialogue: 0,0:00:09.50,0:00:11.50,Funkin - VCR,,0,0,0,,*LAUGHS*
-Dialogue: 0,0:00:11.46,0:00:12.88,Funkin - VCR,,0,0,0,,*Music slows to a stop*
+Dialogue: 0,0:00:11.50,0:00:12.88,Funkin - VCR,,0,0,0,,*Music slows to a stop*
 Comment: 0,0:00:13.60,0:00:24.02,Funkin - VCR,,0,0,0,,ERIC: Hi, this is a comment, I'm not a subtitling super-expert so I'm not super sure how to caption this part, so I'll just leave it blank for now.
 Dialogue: 0,0:00:24.68,0:00:27.86,Funkin - VCR,,0,0,0,,Oh, come on, who the FUCK is this knockoff?
 Dialogue: 0,0:00:29.47,0:00:30.72,Funkin - VCR,,0,0,0,,
